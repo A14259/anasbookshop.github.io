@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ana's Bookshop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f6f1e7;
+    --cream-light:#faf7f0;
+    --brown:#4a3427;
+    --brown-dark:#3a281d;
+    --blue:#a9c2dd;
+    --blue-light:#dbe7f2;
+    --blue-pale:#eef3f9;
+    --ink:#33261c;
+    --muted:#7a6a5c;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--cream-light);not-allowed}
+  body{font-family:'Jost',sans-serif;color:var(--ink);}
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;display:block;}
+  h1,h2,h3{font-family:'Playfair Display',serif;margin:0;}
+
+  /* topbar */
+  .topbar{background:var(--brown);color:#f4ece0;text-align:center;font-size:0.82rem;letter-spacing:.03em;padding:8px 12px;}
+
+  /* nav */
+  header.nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 5%;background:var(--cream-light);
+    border-bottom:1px solid rgba(74,52,39,0.08);
+    flex-wrap:wrap;gap:14px;
+  }
+  .logo{display:flex;align-items:center;gap:8px;}
+  .logo .brand{font-family:'Caveat',cursive;font-size:2.1rem;color:#5c86ad;line-height:1;}
+  .logo .sub{font-size:0.72rem;letter-spacing:0.28em;color:var(--brown);margin-top:2px;}
+  .logo .heart{color:#5c86ad;font-size:1rem;}
+  nav.links{display:flex;gap:34px;align-items:center;font-size:0.98rem;color:var(--brown);}
+  nav.links a{position:relative;padding-bottom:4px;}
+  nav.links a.active{border-bottom:2px solid var(--brown);}
+  .nav-icons{display:flex;gap:20px;align-items:center;color:var(--brown);font-size:1.15rem;}
+
+  /* hero */
+  .hero{
+    position:relative;
+    display:grid;grid-template-columns: 1fr 1.35fr;
+    min-height:440px;overflow:hidden;
+    background:var(--brown);
+  }
+  .hero-left{
+    background: radial-gradient(120% 140% at 0% 20%, var(--blue-light) 0%, var(--blue) 55%, var(--brown) 100%);
+    display:flex;flex-direction:column;justify-content:center;
+    padding:60px 8% 60px 6%;color:var(--brown-dark);position:relative;
+  }
+  .hero-left .heart-icon{font-size:1.4rem;color:#fff;margin-bottom:6px;}
+  .hero-left .script{font-family:'Caveat',cursive;font-size:3rem;color:#3f6c9a;line-height:0.9;}
+  .hero-left h1{font-size:3rem;color:var(--brown-dark);letter-spacing:0.01em;margin-top:2px;}
+  .hero-left p{margin:18px 0 26px;max-width:320px;color:#4a3a2e;line-height:1.5;}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--brown);color:#f4ece0;padding:14px 26px;border-radius:30px;
+    font-size:0.95rem;letter-spacing:0.02em;border:none;cursor:pointer;width:fit-content;
+    transition:background .2s ease;
+  }
+  .btn:hover{background:var(--brown-dark);}
+  .hero-right{position:relative;background-size:cover;background-position:center;}
+  .hero-right img{width:100%;height:100%;object-fit:cover;}
+  .hero-caption{
+    position:absolute;top:24px;right:30px;color:#fff;font-family:'Caveat',cursive;
+    font-size:1.5rem;line-height:1.15;text-align:right;text-shadow:0 1px 6px rgba(0,0,0,0.35);
+  }
+
+  /* categories */
+  .categories{
+    background:var(--cream-light);
+    display:grid;grid-template-columns:repeat(6,1fr);
+    gap:10px;padding:52px 6% 56px;text-align:center;
+  }
+  .cat-icon{
+    width:76px;height:76px;border-radius:50%;background:var(--blue-pale);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 14px;
+    font-size:1.7rem;color:var(--brown);
+  }
+  .categories h3{font-size:1.02rem;color:var(--brown);margin-bottom:6px;}
+  .categories p{font-size:0.8rem;color:var(--muted);line-height:1.4;margin:0;}
+
+  /* bestsellers */
+  .bestsellers{
+    background:var(--blue-pale);
+    display:grid;grid-template-columns: 0.85fr 2.4fr;
+    gap:30px;padding:56px 6%;align-items:start;
+  }
+  .bs-intro .eyebrow{font-size:0.78rem;letter-spacing:0.18em;color:var(--muted);}
+  .bs-intro h2{font-size:2.1rem;color:var(--brown-dark);margin:10px 0 16px;line-height:1.15;}
+  .bs-intro p{color:var(--muted);font-size:0.92rem;line-height:1.55;margin-bottom:22px;max-width:260px;}
+  .products{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+  .product-card{
+    background:#fff;border-radius:14px;overflow:hidden;
+    box-shadow:0 6px 18px rgba(74,52,39,0.08);
+    display:flex;flex-direction:column;
+  }
+  .product-cover{position:relative;aspect-ratio:3/4;background:var(--blue-light);}
+  .product-cover img{width:100%;height:100%;object-fit:cover;}
+  .wish{
+    position:absolute;top:10px;right:10px;width:30px;height:30px;border-radius:50%;
+    background:rgba(255,255,255,0.9);display:flex;align-items:center;justify-content:center;
+    font-size:0.9rem;color:var(--brown);
+  }
+  .product-info{padding:14px 14px 18px;}
+  .product-info .name{font-size:0.88rem;color:var(--ink);line-height:1.3;margin-bottom:6px;min-height:2.4em;}
+  .product-info .price{font-family:'Playfair Display',serif;font-weight:600;color:var(--brown-dark);}
+
+  /* categories tiles row */
+  .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;padding:56px 6%;background:var(--cream-light);}
+  .tile{border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 6px 16px rgba(74,52,39,0.07);}
+  .tile-img{aspect-ratio:4/3;overflow:hidden;}
+  .tile-img img{width:100%;height:100%;object-fit:cover;}
+  .tile-label{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 20px;background:var(--blue-light);color:var(--brown-dark);font-size:1rem;
+  }
+
+  /* footer */
+  footer{
+    background:var(--brown);color:#f0e6d8;
+    display:grid;grid-template-columns:repeat(3,1fr) auto;
+    gap:26px;padding:34px 6%;align-items:center;font-size:0.9rem;
+  }
+  footer .col{display:flex;gap:12px;align-items:flex-start;}
+  footer .col .icon{font-size:1.2rem;margin-top:2px;}
+  footer .col strong{display:block;font-size:0.92rem;}
+  footer .col span{display:block;color:#d9c9b6;font-size:0.78rem;margin-top:2px;}
+  footer .thanks{font-family:'Caveat',cursive;font-size:1.3rem;color:#f0e6d8;text-align:right;line-height:1.2;}
+
+  @media (max-width: 980px){
+    .hero{grid-template-columns:1fr;}
+    .hero-right{height:280px;}
+    .categories{grid-template-columns:repeat(3,1fr);}
+    .bestsellers{grid-template-columns:1fr;}
+    .products{grid-template-columns:repeat(2,1fr);}
+    .tiles{grid-template-columns:repeat(2,1fr);}
+    footer{grid-template-columns:1fr;text-align:center;}
+    footer .col{justify-content:center;}
+    footer .thanks{text-align:center;}
+    nav.links{display:none;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">✦ Libros que te hacen sentir, pensar y soñar ✦</div>
+
+  <header class="nav">
+    <div class="logo">
+      <div>
+        <div class="brand">Ana's <span class="heart">♡</span></div>
+        <div class="sub">BOOKSHOP</div>
+      </div>
+    </div>
+    <nav class="links">
+      <a href="#" class="active">Inicio</a>
+      <a href="#">Tienda</a>
+      <a href="#">Libros</a>
+      <a href="#">Accesorios</a>
+      <a href="#">Sobre nosotros</a>
+      <a href="#">Contacto</a>
+    </nav>
+    <div class="nav-icons">
+      <span>🔍</span>
+      <span>👤</span>
+      <span>🛍️</span>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="script">♡ Ana's</div>
+      <h1>BOOKSHOP</h1>
+      <p>Libros, accesorios y más para las almas que aman leer.</p>
+      <button class="btn">Explora la tienda →</button>
+    </div>
+    <div class="hero-right">
+      <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=1400&auto=format&fit=crop" alt="Libros y café">
+      <div class="hero-caption">Más libros,<br>más historias,<br>más tú ♡</div>
+    </div>
+  </section>
+
+  <section class="categories">
+    <div>
+      <div class="cat-icon">🏔️</div>
+      <h3>Fantasía</h3>
+      <p>(ACOTAR y más)</p>
+    </div>
+    <div>
+      <div class="cat-icon">♡</div>
+      <h3>Romance</h3>
+      <p>(Enemies to Lovers,<br>Romance contemporáneo)</p>
+    </div>
+    <div>
+      <div class="cat-icon">🧠</div>
+      <h3>Psicología</h3>
+      <p>(Salud mental, desarrollo<br>personal, neurociencia)</p>
+    </div>
+    <div>
+      <div class="cat-icon">♀</div>
+      <h3>Feministas</h3>
+      <p>(Ensayo, historia,<br>derechos, empoderamiento)</p>
+    </div>
+    <div>
+      <div class="cat-icon">📖</div>
+      <h3>Novelas</h3>
+      <p>(Young Adult, Adulto,<br>Contemporáneas)</p>
+    </div>
+    <div>
+      <div class="cat-icon">✦</div>
+      <h3>Accesorios</h3>
+      <p>(Fundas de Kindle,<br>figuras, tazas y más)</p>
+    </div>
+  </section>
+
+  <section class="bestsellers">
+    <div class="bs-intro">
+      <div class="eyebrow">BEST SELLERS</div>
+      <h2>Libros que no te puedes perder</h2>
+      <p>Historias que inspiran, que sanan y que te acompañan en cada etapa.</p>
+      <button class="btn">Ver todos →</button>
+    </div>
+    <div class="products">
+      <div class="product-card">
+        <div class="product-cover">
+          <img src="https://covers.openlibrary.org/b/isbn/1635575569-L.jpg" alt="A Court of Thorns and Roses">
+          <div class="wish">♡</div>
+        </div>
+        <div class="product-info">
+          <div class="name">A Court of Thorns and Roses (Inglés)</div>
+          <div class="price">$499 MXN</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-cover">
+          <img src="https://covers.openlibrary.org/b/isbn/1501110365-L.jpg" alt="It Ends With Us">
+          <div class="wish">♡</div>
+        </div>
+        <div class="product-info">
+          <div class="name">It Ends With Us (Inglés)</div>
+          <div class="price">$399 MXN</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-cover">
+          <img src="https://covers.openlibrary.org/b/isbn/9584283551-L.jpg" alt="Hábitos Atómicos">
+          <div class="wish">♡</div>
+        </div>
+        <div class="product-info">
+          <div class="name">Hábitos Atómicos (Español)</div>
+          <div class="price">$349 MXN</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-cover">
+          <img src="https://covers.openlibrary.org/b/isbn/1250161096-L.jpg" alt="The Seven Husbands of Evelyn Hugo">
+          <div class="wish">♡</div>
+        </div>
+        <div class="product-info">
+          <div class="name">Los siete maridos de Evelyn Hugo (Inglés)</div>
+          <div class="price">$439 MXN</div>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-cover">
+          <img src="https://covers.openlibrary.org/b/isbn/1101981048-L.jpg" alt="Dopamine Nation">
+          <div class="wish">♡</div>
+        </div>
+        <div class="product-info">
+          <div class="name">Dopamine Nation (Inglés)</div>
+          <div class="price">$399 MXN</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tiles">
+    <div class="tile">
+      <div class="tile-img"><img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=800&auto=format&fit=crop" alt="Fundas para Kindle"></div>
+      <div class="tile-label">Fundas para Kindle <span>→</span></div>
+    </div>
+    <div class="tile">
+      <div class="tile-img"><img src="https://images.unsplash.com/photo-1618519764620-7403abdbdfe9?q=80&w=800&auto=format&fit=crop" alt="Figuras y accesorios"></div>
+      <div class="tile-label">Figuras y accesorios <span>→</span></div>
+    </div>
+    <div class="tile">
+      <div class="tile-img"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop" alt="Tazas y más"></div>
+      <div class="tile-label">Tazas y más <span>→</span></div>
+    </div>
+    <div class="tile">
+      <div class="tile-img"><img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?q=80&w=800&auto=format&fit=crop" alt="Regalos para lectores"></div>
+      <div class="tile-label">Regalos para lectores <span>→</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="col">
+      <span class="icon">🚚</span>
+      <div>
+        <strong>Envíos a todo México</strong>
+        <span>(y más países)</span>
+      </div>
+    </div>
+    <div class="col">
+      <span class="icon">♡</span>
+      <div>
+        <strong>Empaques especiales</strong>
+        <span>(porque cada libro importa)</span>
+      </div>
+    </div>
+    <div class="col">
+      <span class="icon">🌿</span>
+      <div>
+        <strong>Lectores felices</strong>
+        <span>(nuestra mayor motivación)</span>
+      </div>
+    </div>
+    <div class="thanks">Thank you<br>for supporting<br>small business ♡</div>
+  </footer>
+
+</body>
+</html>
